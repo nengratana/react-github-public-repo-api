@@ -15,11 +15,24 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const baseurl = "https://api.github.com/repositories?since=";
+    const baseurl = "https://api.github.com/repositoriexxs?since=";
     const url = baseurl + this.state.currentRepo;
     fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw Error("Request Failed");
+        }
+        return response;
+      })
       .then(response => response.json())
-      .then(data => this.setState({ data }));
+      .then(
+        data => {
+          this.setState({ data });
+        },
+        () => {
+          this.setState({ error: true });
+        }
+      );
   }
 
   next = () => {
@@ -40,11 +53,17 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Github Public Repositories</h1>
-        <Table
-          data={data}
-          resultCount={resultCount}
-          resultsPerPage={resultsPerPage}
-        />
+
+        {error ? (
+          "Something wrong with Github API"
+        ) : (
+          <Table
+            data={data}
+            resultCount={resultCount}
+            resultsPerPage={resultsPerPage}
+          />
+        )}
+
         {resultCount === 0 ? (
           ""
         ) : (
