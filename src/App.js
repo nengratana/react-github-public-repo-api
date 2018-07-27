@@ -22,10 +22,16 @@ class App extends Component {
       .then(data => this.setState({ data }));
   }
 
-  next = event => {
+  next = () => {
     const { currentRepo, resultsPerPage } = this.state;
     const nextRepo = currentRepo + resultsPerPage;
     this.setState({ currentRepo: nextRepo });
+  };
+
+  back = () => {
+    const { currentRepo, resultsPerPage } = this.state;
+    const prevRepo = currentRepo - resultsPerPage;
+    this.setState({ currentRepo: prevRepo });
   };
 
   render() {
@@ -39,7 +45,9 @@ class App extends Component {
           currentRepo={currentRepo}
           resultsPerPage={resultsPerPage}
         />
-        <button className="button">Back</button>
+        <button className="button" onClick={this.back}>
+          Back
+        </button>
         <button className="button" onClick={this.next}>
           Next
         </button>
