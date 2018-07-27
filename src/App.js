@@ -1,18 +1,33 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 class App extends Component {
+  state = {
+    data: [],
+    isLoading: false,
+    error: false,
+    start: 0
+  };
+
+  componentDidMount() {
+    const baseurl = "https://api.github.com/repositories?since=";
+    const url = baseurl + this.state.start;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => this.setState({ data }));
+  }
+
   render() {
+    const { data, isLoading, error, start } = this.state;
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>Github Public Repositories</h1>
+        {data.map(repo => {
+          return <p key={repo.id}>{repo.name}</p>;
+        })}
       </div>
     );
   }
