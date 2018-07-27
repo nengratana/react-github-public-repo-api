@@ -15,10 +15,12 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.setState({ isLoading: true });
     const baseurl = "https://api.github.com/repositoriexxs?since=";
     const url = baseurl + this.state.currentRepo;
     fetch(url)
       .then(response => {
+        this.setState({ isLoading: false });
         if (!response.ok) {
           throw Error("Request Failed");
         }
@@ -53,7 +55,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Github Public Repositories</h1>
-
+        {isLoading ? "Loading" : ""}
         {error ? (
           "Something wrong with Github API"
         ) : (
@@ -71,6 +73,7 @@ class App extends Component {
             Back
           </button>
         )}
+
         {resultCount + resultsPerPage < results ? (
           <button className="button" onClick={this.next}>
             Next
