@@ -9,50 +9,50 @@ class App extends Component {
     data: [],
     isLoading: false,
     error: false,
-    currentRepo: 0,
-    resultsPerPage: 9
+    currentRepo: 1000, //142583100,
+    resultCount: 0,
+    resultsPerPage: 10
   };
 
   componentDidMount() {
     const baseurl = "https://api.github.com/repositories?since=";
     const url = baseurl + this.state.currentRepo;
-
     fetch(url)
       .then(response => response.json())
       .then(data => this.setState({ data }));
   }
 
   next = () => {
-    const { currentRepo, resultsPerPage } = this.state;
-    const nextRepo = currentRepo + resultsPerPage;
-    this.setState({ currentRepo: nextRepo });
+    const { resultCount, resultsPerPage } = this.state;
+    const nextRepo = resultCount + resultsPerPage;
+    this.setState({ resultCount: nextRepo });
   };
 
   back = () => {
-    const { currentRepo, resultsPerPage } = this.state;
-    const prevRepo = currentRepo - resultsPerPage;
-    this.setState({ currentRepo: prevRepo });
+    const { resultCount, resultsPerPage } = this.state;
+    const prevRepo = resultCount - resultsPerPage;
+    this.setState({ resultCount: prevRepo });
   };
 
   render() {
-    const { data, isLoading, error, currentRepo, resultsPerPage } = this.state;
+    const { data, isLoading, error, resultCount, resultsPerPage } = this.state;
     const results = data.length;
     return (
       <div className="App">
         <h1>Github Public Repositories</h1>
         <Table
           data={data}
-          currentRepo={currentRepo}
+          resultCount={resultCount}
           resultsPerPage={resultsPerPage}
         />
-        {currentRepo == 0 ? (
+        {resultCount === 0 ? (
           ""
         ) : (
           <button className="button" onClick={this.back}>
             Back
           </button>
         )}
-        {currentRepo + resultsPerPage < results ? (
+        {resultCount + resultsPerPage < results ? (
           <button className="button" onClick={this.next}>
             Next
           </button>
