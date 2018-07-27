@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
+import Table from "./Table";
+
 class App extends Component {
   state = {
     data: [],
@@ -25,6 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Github Public Repositories</h1>
+        <Table />
         {data.map(repo => {
           return <p key={repo.id}>{repo.name}</p>;
         })}
