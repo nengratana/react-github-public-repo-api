@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 import Table from "./Table";
@@ -16,7 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    const baseurl = "https://api.github.com/repositoriexxs?since=";
+    const baseurl = "https://api.github.com/repositories?since=";
     const url = baseurl + this.state.currentRepo;
     fetch(url)
       .then(response => {
