@@ -27,10 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Github Public Repositories</h1>
-        <Table />
-        {data.map(repo => {
-          return <p key={repo.id}>{repo.name}</p>;
-        })}
+        <Table data={data} />
       </div>
     );
   }
