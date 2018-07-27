@@ -10,7 +10,7 @@ class App extends Component {
     isLoading: false,
     error: false,
     currentRepo: 0,
-    resultsPerPage: 10
+    resultsPerPage: 9
   };
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class App extends Component {
 
   render() {
     const { data, isLoading, error, currentRepo, resultsPerPage } = this.state;
-
+    const results = data.length;
     return (
       <div className="App">
         <h1>Github Public Repositories</h1>
@@ -45,12 +45,20 @@ class App extends Component {
           currentRepo={currentRepo}
           resultsPerPage={resultsPerPage}
         />
-        <button className="button" onClick={this.back}>
-          Back
-        </button>
-        <button className="button" onClick={this.next}>
-          Next
-        </button>
+        {currentRepo == 0 ? (
+          ""
+        ) : (
+          <button className="button" onClick={this.back}>
+            Back
+          </button>
+        )}
+        {currentRepo + resultsPerPage < results ? (
+          <button className="button" onClick={this.next}>
+            Next
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
