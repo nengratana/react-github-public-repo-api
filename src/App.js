@@ -9,7 +9,8 @@ class App extends Component {
     data: [],
     isLoading: false,
     error: false,
-    start: 0
+    start: 0,
+    resultsPerPage: 10
   };
 
   componentDidMount() {
@@ -22,12 +23,12 @@ class App extends Component {
   }
 
   render() {
-    const { data, isLoading, error, start } = this.state;
+    const { data, isLoading, error, start, resultsPerPage } = this.state;
 
     return (
       <div className="App">
         <h1>Github Public Repositories</h1>
-        <Table data={data} />
+        <Table data={data} start={start} resultsPerPage={resultsPerPage} />
       </div>
     );
   }
