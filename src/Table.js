@@ -13,12 +13,24 @@ const Table = props => {
         </tr>
       </thead>
       {isLoading ? (
-        <tbody className="loading">Fetching data from Github API ...</tbody>
+        <tbody>
+          <tr>
+            <td colspan="4" className="loading message">
+              LOADING...
+            </td>
+          </tr>
+        </tbody>
       ) : (
         <tbody />
       )}
       {error ? (
-        <tbody className="error">Fetching data failed!</tbody>
+        <tbody>
+          <tr>
+            <td colspan="4" className="error message">
+              Fetching data failed!
+            </td>
+          </tr>
+        </tbody>
       ) : (
         <tbody>
           {data.slice(resultCount, resultCount + resultsPerPage).map(repo => {

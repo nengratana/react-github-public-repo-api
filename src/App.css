@@ -83,3 +83,20 @@ table {
   background-color: #00cebd;
   color: white;
 }
+
+.message {
+  width:100%;
+  text-align: center;
+  font-size: 20px;
+  padding: 100px;
+}
+
+.loading {
+  font-family: 'Courier New', Courier, monospace;
+  color: #00cebd !important;
+}
+
+.error {
+  font-family: 'Courier New', Courier, monospace;
+  color: #fb6d77 !important;
+}
