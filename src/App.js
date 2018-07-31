@@ -42,14 +42,14 @@ class App extends Component {
 
   next = () => {
     const { resultCount, resultsPerPage } = this.state;
-    // Set mark for .Slice
+    // Set mark for .Slice (Pagination)
     const nextRepo = resultCount + resultsPerPage;
     this.setState({ resultCount: nextRepo });
   };
 
   back = () => {
     const { resultCount, resultsPerPage } = this.state;
-    // Set mark for .Slice
+    // Set mark for .Slice (Pagination)
     const prevRepo = resultCount - resultsPerPage;
     this.setState({ resultCount: prevRepo });
   };
@@ -70,7 +70,7 @@ class App extends Component {
             error={error}
           />
           <div className="pagination">
-            {resultCount === 0 ? (
+            {resultCount === 0 ? ( // If this is the first page, hide Back button
               ""
             ) : (
               <button className="button" onClick={this.back}>
@@ -78,7 +78,7 @@ class App extends Component {
               </button>
             )}
 
-            {resultCount + resultsPerPage < results ? (
+            {resultCount + resultsPerPage < results ? ( // If this is the last page, hide Next button
               <button className="button" onClick={this.next}>
                 Next
               </button>
